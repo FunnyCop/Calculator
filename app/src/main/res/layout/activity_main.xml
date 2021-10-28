@@ -4,211 +4,232 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:padding="16dp"
     tools:context=".MainActivity">
+
+    <!--  Display  -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_main"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="12dp"
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_one"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_weight="1.2" />
 
     <!--  One  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_one"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/toprownum"
         android:text="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mbtn_two"
+        app:layout_constraintTop_toBottomOf="@id/tv_main"
         app:layout_constraintBottom_toTopOf="@id/mbtn_four"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Two  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_two"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/toprownum"
         android:text="2"
         app:layout_constraintStart_toEndOf="@id/mbtn_one"
         app:layout_constraintEnd_toStartOf="@id/mbtn_three"
+        app:layout_constraintTop_toBottomOf="@id/tv_main"
         app:layout_constraintBottom_toTopOf="@id/mbtn_five"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Three  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_three"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/toprownum"
         android:text="3"
         app:layout_constraintStart_toEndOf="@id/mbtn_two"
         app:layout_constraintEnd_toStartOf="@id/mbtn_plus"
+        app:layout_constraintTop_toBottomOf="@id/tv_main"
         app:layout_constraintBottom_toTopOf="@id/mbtn_six"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Plus  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_plus"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        style="@style/toprow"
         android:text="+"
         app:layout_constraintStart_toEndOf="@id/mbtn_three"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_main"
         app:layout_constraintBottom_toTopOf="@id/mbtn_minus"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Four  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_four"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mbtn_five"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_one"
         app:layout_constraintBottom_toTopOf="@id/mbtn_seven"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Five  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_five"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="5"
         app:layout_constraintStart_toEndOf="@id/mbtn_four"
         app:layout_constraintEnd_toStartOf="@id/mbtn_six"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_two"
         app:layout_constraintBottom_toTopOf="@id/mbtn_eight"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Six  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_six"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="6"
         app:layout_constraintStart_toEndOf="@id/mbtn_five"
         app:layout_constraintEnd_toStartOf="@id/mbtn_minus"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_three"
         app:layout_constraintBottom_toTopOf="@id/mbtn_nine"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Minus  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_minus"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        style="@style/mbtn"
         android:text="-"
         app:layout_constraintStart_toEndOf="@id/mbtn_six"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_plus"
         app:layout_constraintBottom_toTopOf="@id/mbtn_multiplication"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
-    <!--  Nine  -->
+    <!--  Seven  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_seven"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="7"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mbtn_eight"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_four"
         app:layout_constraintBottom_toTopOf="@id/mbtn_zero"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Eight  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_eight"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="8"
         app:layout_constraintStart_toEndOf="@id/mbtn_seven"
         app:layout_constraintEnd_toStartOf="@id/mbtn_nine"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_five"
         app:layout_constraintBottom_toTopOf="@id/mbtn_negate"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Nine  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_nine"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="9"
         app:layout_constraintStart_toEndOf="@id/mbtn_eight"
         app:layout_constraintEnd_toStartOf="@id/mbtn_multiplication"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_six"
         app:layout_constraintBottom_toTopOf="@id/mbtn_equals"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Multiplication  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_multiplication"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        style="@style/mbtn"
         android:text="*"
         app:layout_constraintStart_toEndOf="@id/mbtn_nine"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_minus"
         app:layout_constraintBottom_toTopOf="@id/mbtn_divide"
-        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Zero  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_zero"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin.num"
         android:text="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mbtn_negate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_seven"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_point"
         tools:ignore="HardcodedText" />
 
     <!--  Negate  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_negate"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin"
         android:text="+/-"
         app:layout_constraintStart_toEndOf="@id/mbtn_zero"
         app:layout_constraintEnd_toStartOf="@id/mbtn_equals"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_eight"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_point"
         tools:ignore="HardcodedText" />
 
     <!--  Equals  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_equals"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="16dp"
+        style="@style/mbtn.margin"
         android:text="="
         app:layout_constraintStart_toEndOf="@id/mbtn_negate"
         app:layout_constraintEnd_toStartOf="@id/mbtn_divide"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_nine"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_point"
         tools:ignore="HardcodedText" />
 
     <!--  Division  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_divide"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
+        style="@style/mbtn"
         android:text="/"
         app:layout_constraintStart_toEndOf="@id/mbtn_equals"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_multiplication"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_point"
         tools:ignore="HardcodedText" />
+
+    <!--  Point  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_point"
+        style="@style/mbtn.bottom.margin"
+        android:text="."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_delete"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!--  Backspace  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_delete"
+        style="@style/mbtn.bottom.margin"
+        android:text="delete"
+        app:layout_constraintStart_toEndOf="@id/mbtn_point"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_clear"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!--  Clear  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_clear"
+        style="@style/mbtn.bottom"
+        android:text="clear"
+        app:layout_constraintStart_toEndOf="@id/mbtn_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
