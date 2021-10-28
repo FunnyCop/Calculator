@@ -78,10 +78,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="5"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_eight"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_six"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_four"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_six"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_eight"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Six  -->
@@ -91,10 +91,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="6"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_nine"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_minus"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_five"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_minus"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_nine"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Minus  -->
@@ -103,10 +103,10 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="-"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_multiplication"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_six"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_multiplication"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Nine  -->
@@ -116,10 +116,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="7"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_zero"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_eight"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_eight"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_zero"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Eight  -->
@@ -129,10 +129,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="8"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_negate"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_nine"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_seven"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_nine"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_negate"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Nine  -->
@@ -142,10 +142,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="9"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_equals"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_multiplication"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_eight"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_multiplication"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_equals"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Multiplication  -->
@@ -154,10 +154,10 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="*"
-        app:layout_constraintBottom_toTopOf="@id/mbtn_divide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_nine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_divide"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Zero  -->
@@ -167,10 +167,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_negate"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_negate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Negate  -->
@@ -180,10 +180,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="+/-"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_equals"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_zero"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_equals"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Equals  -->
@@ -193,10 +193,10 @@
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         android:text="="
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/mbtn_divide"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_negate"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_divide"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
     <!--  Division  -->
@@ -205,10 +205,10 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:text="/"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toEndOf="@id/mbtn_equals"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
         tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
