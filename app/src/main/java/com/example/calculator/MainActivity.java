@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Double result = null;
     private String currentNumber = "";
-    private double storedNumber = 0.0;
+    private Double storedNumber = null;
     private String operation = "+";
 
     @Override
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
+        // Initialization
         initBinding();
         initDisplay();
         initButtons();
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initBinding() {
 
+        // Set binding to activity_main
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
         setContentView(binding.getRoot());
@@ -49,7 +51,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initDisplay() {
 
+        // Set display to tv_main
         display = binding.tvMain;
+
+        // Set the displayed number to currentNumber
         display.setText(currentNumber);
 
     }
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void initButtons() {
 
+        // Array of number buttons
         MaterialButton[] numberButtons = new MaterialButton[]{
 
                 binding.mbtnZero,
@@ -74,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
         };
 
+        // Array of operator buttons
         MaterialButton[] operatorButtons = new MaterialButton[]{
 
                 binding.mbtnPlus,
@@ -88,9 +95,11 @@ public class MainActivity extends AppCompatActivity {
 
         };
 
+        // For each number button, attach onClickNumber to the onClickListener
         for (MaterialButton button : numberButtons)
             button.setOnClickListener(this::onClickNumber);
 
+        // For each operator button, attach onClickOperator to the onClickListener
         for (MaterialButton button : operatorButtons)
             button.setOnClickListener(this::onClickOperator);
 
@@ -102,9 +111,10 @@ public class MainActivity extends AppCompatActivity {
      */
     private void onClickNumber(View v) {
 
-        String button = ((Button) v).getText().toString();
-        currentNumber = currentNumber + button;
+        // Add the clicked number to current number
+        currentNumber = currentNumber + ((Button) v).getText().toString();
 
+        // Set the displayed number to currentNumber
         display.setText(currentNumber);
 
     }
@@ -115,47 +125,94 @@ public class MainActivity extends AppCompatActivity {
      */
     private void onClickOperator(View v) {
 
+        // Get the text from the button being pressed
         String button = ((Button) v).getText().toString();
 
+        // If mbtn_negate is pressed
         if (button.equals("+/-")) {
 
-            currentNumber = String.valueOf(Integer.parseInt(currentNumber) * -1);
+            // These are split to trap the execution of the method
 
-            display.setText(currentNumber);
+            // If currentNumber is not empty
+            if (!currentNumber.equals("")) {
 
-        } else if (button.equals(".")) {
+                // Negate the currentNumber (positive to negate, negative to positive)
+                currentNumber = String.valueOf(Integer.parseInt(currentNumber) * -1);
 
-            if (!currentNumber.contains(".")) {
-
-                currentNumber = currentNumber + ".";
-
+                // Set the displayed number to currentNumber
                 display.setText(currentNumber);
 
             }
 
+        // If mbtn_point is pressed
+        } else if (button.equals(".")) {
+
+            // These are split to trap the execution of the method
+
+            // If currentNumber does not contain a decimal point
+            if (!currentNumber.contains(".") && !currentNumber.equals("")) {
+
+                // Add a decimal point to currentNumber
+                currentNumber = currentNumber + ".";
+
+                // Set the displayed number to currentNumber
+                display.setText(currentNumber);
+
+            }
+
+        // If mbtn_delete is pressed
         } else if (button.equals("delete")) {
 
-            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
+            // These are split to trap the execution of the method
 
-            display.setText(currentNumber);
+            // If currentNumber is not empty
+            if (!currentNumber.equals("")) {
 
+                // Remove the last character from currentNumber
+                currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
+
+                // Set the displayed number to currentNumber
+                display.setText(currentNumber);
+
+            }
+
+        // If mbtn_clear is pressed
         } else if (button.equals("clear")) {
 
+            // Reset all member variables
             result = null;
             currentNumber = "";
-            storedNumber = 0.0;
+            storedNumber = null;
             operation = "+";
 
+            // Set the displayed number to currentNumber
             display.setText(currentNumber);
 
-        } else if (!button.equals("=") && !currentNumber.equals("")) {
+        // If any operator is pressed (except mbtn_equals) and currentNumber is not empty
+        } else if (!button.equals("=")) {
 
-            storedNumber = Integer.parseInt(currentNumber);
-            currentNumber = "";
+            // Set operator
             operation = button;
 
-            display.setText(currentNumber);
+            // If currentNumber is empty and result is not null
+            if (currentNumber.equals("") && result != null)
+                storedNumber = result;
 
+            // If currentNumber is not empty and storedNumber is null
+            else if (!currentNumber.equals("") && storedNumber == null) {
+
+                // Store currentNumber, clear current number
+                storedNumber = Double.parseDouble(currentNumber);
+                currentNumber = "";
+
+                // Set the displayed number to currentNumber
+                display.setText(currentNumber);
+
+            // If currentNumber is not empty
+            } else if (!currentNumber.equals(""))
+                evaluateOperation();
+
+        // If mbtn_equals is pressed and currentNumber is not empty
         } else if (!currentNumber.equals(""))
             evaluateOperation();
 
@@ -166,39 +223,52 @@ public class MainActivity extends AppCompatActivity {
      */
     private void evaluateOperation() {
 
-        if (Objects.equals(result, null) || result != storedNumber) {
+        // If result is null and is not equal to storedNumber
+        if (Objects.equals(result, null) || !result.equals(storedNumber)) {
 
+            // Addition
             if (operation.equals("+"))
-                result = storedNumber + (double) Integer.parseInt(currentNumber);
+                result = storedNumber + Double.parseDouble(currentNumber);
 
+            // Subtraction
             if (operation.equals("-"))
-                result = storedNumber - (double) Integer.parseInt(currentNumber);
+                result = storedNumber - Double.parseDouble(currentNumber);
 
+            // Multiplication
             if (operation.equals("*"))
-                result = storedNumber * (double) Integer.parseInt(currentNumber);
+                result = storedNumber * Double.parseDouble(currentNumber);
 
+            // Division
             if (operation.equals(("/")))
-                result = storedNumber / (double) Integer.parseInt(currentNumber);
+                result = storedNumber / Double.parseDouble(currentNumber);
 
         } else {
 
+            // Addition
             if (operation.equals("+"))
-                result = result + (double) Integer.parseInt(currentNumber);
+                result = result + Double.parseDouble(currentNumber);
 
+            // Subtraction
             if (operation.equals("-"))
-                result = result - (double) Integer.parseInt(currentNumber);
+                result = result - Double.parseDouble(currentNumber);
 
+            // Multiplication
             if (operation.equals("*"))
-                result = result * (double) Integer.parseInt(currentNumber);
+                result = result * Double.parseDouble(currentNumber);
 
+            // Division
             if (operation.equals(("/")))
-                result = result / (double) Integer.parseInt(currentNumber);
+                result = result / Double.parseDouble(currentNumber);
 
         }
 
+        // Set the displayed number to result
         display.setText(String.valueOf(result));
 
+        // Clear currentNumber
         currentNumber = "";
+
+        // Store result
         storedNumber = result;
 
     }
