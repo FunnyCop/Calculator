@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private void initButtons() {
 
         // Array of number buttons
-        MaterialButton[] numberButtons = new MaterialButton[]{
+        MaterialButton[] numberButtons = new MaterialButton[] {
 
                 binding.mbtnZero,
                 binding.mbtnOne,
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // Array of operator buttons
-        MaterialButton[] operatorButtons = new MaterialButton[]{
+        MaterialButton[] operatorButtons = new MaterialButton[] {
 
                 binding.mbtnPlus,
                 binding.mbtnMinus,
@@ -191,9 +191,6 @@ public class MainActivity extends AppCompatActivity {
         // If any operator is pressed (except mbtn_equals) and currentNumber is not empty
         } else if (!button.equals("=")) {
 
-            // Set operator
-            operation = button;
-
             // If currentNumber is empty and result is not null
             if (currentNumber.equals("") && result != null)
                 storedNumber = result;
@@ -216,6 +213,9 @@ public class MainActivity extends AppCompatActivity {
         } else if (!currentNumber.equals(""))
             evaluateOperation();
 
+        // Set operator
+        operation = button;
+
     }
 
     /**
@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
         else target = result;
 
-        switch(String.valueOf(operation)) {
+        switch(operation) {
 
             // Addition
             case "+": result = target + Double.parseDouble(currentNumber); break;
