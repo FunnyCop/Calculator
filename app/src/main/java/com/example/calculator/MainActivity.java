@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private void initButtons() {
 
         // Array of number buttons
-        MaterialButton[] numberButtons = new MaterialButton[] {
+        final MaterialButton[] numberButtons = new MaterialButton[] {
 
                 binding.mbtnZero,
                 binding.mbtnOne,
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
         };
 
         // Array of operator buttons
-        MaterialButton[] operatorButtons = new MaterialButton[] {
+        final MaterialButton[] operatorButtons = new MaterialButton[] {
 
                 binding.mbtnPlus,
                 binding.mbtnMinus,
@@ -131,78 +131,117 @@ public class MainActivity extends AppCompatActivity {
     private void onClickOperator(View v) {
 
         // Get the text from the button being pressed
-        String button = ((Button) v).getText().toString();
+        final String button = ((Button) v).getText().toString();
 
         // Might change this huge if/elseif with a switch, not sure if possible
 
-        // If mbtn_negate is pressed
-        if (button.equals("+/-")) {
+        switch(button) {
 
-            // These are split to trap the execution of the method
+            // Negate
+            case "+/-": negateCurrentNumber(); break;
 
-            // If currentNumber is not empty
-            if (!currentNumber.equals("")) {
+            // Point
+            case ".": addDecimalPoint(); break;
 
-                // Negate the currentNumber (positive to negate, negative to positive)
-                currentNumber = String.valueOf(Integer.parseInt(currentNumber) * -1);
+            // Delete
+            case "delete": deleteLastCharacter(); break;
 
-                // Set the displayed number to currentNumber
-                display.setText(currentNumber);
+            // Clear
+            case "clear": clearValues(); break;
 
-            }
+            default: determineEvaluation(button);
 
-        // If mbtn_point is pressed
-        } else if (button.equals(".")) {
+        }
 
-            // These are split to trap the execution of the method
+        // If button is not mbtn_negate, set operator
+        if (!button.equals("+/-")) operation = button;
 
-            // If currentNumber does not contain a decimal point
-            if (!currentNumber.contains(".") && !currentNumber.equals("")) {
+    }
 
-                // Add a decimal point to currentNumber
-                currentNumber = currentNumber + ".";
+    /**
+     * Negate currentNumber
+     */
+    private void negateCurrentNumber() {
 
-                // Set the displayed number to currentNumber
-                display.setText(currentNumber);
+        // If currentNumber is not empty
+        if (!currentNumber.equals("")) {
 
-            }
-
-        // If mbtn_delete is pressed
-        } else if (button.equals("delete")) {
-
-            // These are split to trap the execution of the method
-
-            // If currentNumber is not empty
-            if (!currentNumber.equals("")) {
-
-                // Remove the last character from currentNumber
-                currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
-
-                // Set the displayed number to currentNumber
-                display.setText(currentNumber);
-
-            }
-
-        // If mbtn_clear is pressed
-        } else if (button.equals("clear")) {
-
-            // Reset all member variables
-            result = null;
-            currentNumber = "";
-            storedNumber = null;
-            operation = "";
+            // Negate currentNumber (positive to negate, negative to positive)
+            currentNumber = String.valueOf(Integer.parseInt(currentNumber) * -1);
 
             // Set the displayed number to currentNumber
             display.setText(currentNumber);
 
-        // If any operator is pressed (except mbtn_equals) and currentNumber is not empty
-        } else if (!button.equals("=")) {
+        }
+
+    }
+
+    /**
+     * Add a decimal point to currentNumber
+     */
+    private void addDecimalPoint() {
+
+        // If currentNumber does not contain a decimal point
+        if (!currentNumber.contains(".") && !currentNumber.equals("")) {
+
+            // Add a decimal point to currentNumber
+            currentNumber = currentNumber + ".";
+
+            // Set the displayed number to currentNumber
+            display.setText(currentNumber);
+
+        }
+
+    }
+
+    /**
+     * Delete the last character in currentNumber
+     */
+    private void deleteLastCharacter() {
+
+        // If currentNumber is not empty
+        if (!currentNumber.equals("")) {
+
+            // Remove the last character from currentNumber
+            currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
+
+            // Set the displayed number to currentNumber
+            display.setText(currentNumber);
+
+        }
+
+    }
+
+    /**
+     * Clear all values
+     */
+    private void clearValues() {
+
+        // Reset all member variables
+        result = null;
+        currentNumber = "";
+        storedNumber = null;
+        operation = "";
+
+        // Set the displayed number to currentNumber
+        display.setText(currentNumber);
+
+    }
+
+    /**
+     * Determine how to evaluate the pressed operator (mathematical)
+     * @param button Button that is being pressed
+     */
+    private void determineEvaluation(String button) {
+
+        // If any operator is pressed (except mbtn_equals)
+        if (!button.equals("=")) {
 
             // If currentNumber is empty and result is not null
             if (currentNumber.equals("") && result != null)
                 storedNumber = result;
 
-            // If currentNumber is not empty and storedNumber is null
+                // If currentNumber is not empty and storedNumber is null
             else if (!currentNumber.equals("") && storedNumber == null) {
 
                 // Store currentNumber, clear current number
@@ -212,19 +251,15 @@ public class MainActivity extends AppCompatActivity {
                 // Set the displayed number to currentNumber
                 display.setText(currentNumber);
 
-            // If currentNumber is not empty
+                // If currentNumber is not empty
             } else if (!currentNumber.equals(""))
                 evaluateOperation();
 
-        // If mbtn_equals is pressed and currentNumber is not empty
+            // If mbtn_equals is pressed and currentNumber is not empty
         } else if (!currentNumber.equals(""))
             evaluateOperation();
 
-        // Set operator
-        operation = button;
-
     }
-
     /**
      * Evaluate operation against current and stored numbers
      */
@@ -250,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
             case "*": result = target * Double.parseDouble(currentNumber); break;
 
             // Division
-            case "/": result = target / Double.parseDouble(currentNumber); break;
+            case "/": result = target / Double.parseDouble(currentNumber);
 
         }
 
