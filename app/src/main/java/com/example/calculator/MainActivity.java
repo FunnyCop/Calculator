@@ -1,8 +1,10 @@
 package com.example.calculator;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -11,11 +13,6 @@ import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 import java.util.Objects;
-
-/**
- * TODO
- * Change display to string with storedNumber, operator, and currentNumber
- */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     private Double storedNumber = null;
     private Double result = null;
     private String operation;
+
+    private final String DIVIDE_BY_ZERO_ERROR = "Error, cannot divide by zero";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +60,26 @@ public class MainActivity extends AppCompatActivity {
 
         // Set the displayed number to currentNumber
         display.setText(currentNumber);
+
+    }
+
+    /**
+     * Set displayed string
+     */
+    private void setDisplay() {
+
+        // If result is Infinity, display error
+        if (String.valueOf(result).equals("Infinity"))
+            display.setText(DIVIDE_BY_ZERO_ERROR);
+
+        // If storedNumber is not null
+        else if (storedNumber != null)
+
+            // Set the displayed number to currentNumber
+            display.setText(String.format("%s %s %s", storedNumber, operation, currentNumber));
+
+        // Set the displayed number to currentNumber
+        else display.setText(currentNumber);
 
     }
 
@@ -119,8 +138,7 @@ public class MainActivity extends AppCompatActivity {
         // Add the clicked number to current number
         currentNumber = currentNumber + ((Button) v).getText().toString();
 
-        // Set the displayed number to currentNumber
-        display.setText(currentNumber);
+        setDisplay();
 
     }
 
@@ -154,7 +172,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // If button is not mbtn_negate, set operator
-        if (!button.equals("+/-")) operation = button;
+        if (!button.equals("+/-") && !button.equals("=")) operation = button;
+
+        // If button is not mbtn_equals, set display
+        if (!button.equals("=")) setDisplay();
 
     }
 
@@ -169,8 +190,7 @@ public class MainActivity extends AppCompatActivity {
             // Negate currentNumber (positive to negate, negative to positive)
             currentNumber = String.valueOf(Integer.parseInt(currentNumber) * -1);
 
-            // Set the displayed number to currentNumber
-            display.setText(currentNumber);
+            setDisplay();
 
         }
 
@@ -187,8 +207,7 @@ public class MainActivity extends AppCompatActivity {
             // Add a decimal point to currentNumber
             currentNumber = currentNumber + ".";
 
-            // Set the displayed number to currentNumber
-            display.setText(currentNumber);
+            setDisplay();
 
         }
 
@@ -205,8 +224,7 @@ public class MainActivity extends AppCompatActivity {
             // Remove the last character from currentNumber
             currentNumber = currentNumber.substring(0, currentNumber.length() - 1);
 
-            // Set the displayed number to currentNumber
-            display.setText(currentNumber);
+            setDisplay();
 
         }
 
@@ -223,8 +241,9 @@ public class MainActivity extends AppCompatActivity {
         storedNumber = null;
         operation = "";
 
-        // Set the displayed number to currentNumber
-        display.setText(currentNumber);
+        // If error is not displayed
+        if (!display.getText().toString().equals("Error"))
+            setDisplay();
 
     }
 
@@ -232,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
      * Determine how to evaluate the pressed operator (mathematical)
      * @param button Button that is being pressed
      */
-    private void determineEvaluation(String button) {
+    private void determineEvaluation(@NonNull String button) {
 
         // If any operator is pressed (except mbtn_equals)
         if (!button.equals("=")) {
@@ -248,8 +267,7 @@ public class MainActivity extends AppCompatActivity {
                 storedNumber = Double.parseDouble(currentNumber);
                 currentNumber = "";
 
-                // Set the displayed number to currentNumber
-                display.setText(currentNumber);
+                setDisplay();
 
                 // If currentNumber is not empty
             } else if (!currentNumber.equals(""))
@@ -260,11 +278,13 @@ public class MainActivity extends AppCompatActivity {
             evaluateOperation();
 
     }
+
     /**
      * Evaluate operation against current and stored numbers
      */
     private void evaluateOperation() {
 
+        final String equation = String.format("%s %s %s", storedNumber, operation, currentNumber);
         Double target;
 
         // If result is null and is not equal to storedNumber
@@ -273,30 +293,45 @@ public class MainActivity extends AppCompatActivity {
 
         else target = result;
 
-        switch(operation) {
+        switch (operation) {
 
             // Addition
-            case "+": result = target + Double.parseDouble(currentNumber); break;
+            case "+":
+                result = target + Double.parseDouble(currentNumber);
+                break;
 
             // Subtraction
-            case "-": result = target - Double.parseDouble(currentNumber); break;
+            case "-":
+                result = target - Double.parseDouble(currentNumber);
+                break;
 
             // Multiplication
-            case "*": result = target * Double.parseDouble(currentNumber); break;
+            case "*":
+                result = target * Double.parseDouble(currentNumber);
+                break;
 
             // Division
-            case "/": result = target / Double.parseDouble(currentNumber);
+            case "/":
+                result = target / Double.parseDouble(currentNumber);
 
         }
 
-        // Set the displayed number to result
-        display.setText(String.valueOf(result));
+        // If result is Infinity, display error
+        if (String.valueOf(result).equals("Infinity"))
+            display.setText(DIVIDE_BY_ZERO_ERROR);
 
-        // Clear currentNumber
-        currentNumber = "";
+        else {
 
-        // Store result
-        storedNumber = result;
+            // Set the displayed number to result
+            display.setText(String.format("%s = %s", equation, result));
+
+            // Clear currentNumber
+            currentNumber = "";
+
+            // Store result
+            storedNumber = result;
+
+        }
 
     }
 
