@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private MaterialTextView display;
 
-    private Double result = null;
     private String currentNumber = "";
     private Double storedNumber = null;
-    private String operation = "+";
+    private Double result = null;
+    private String operation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +128,8 @@ public class MainActivity extends AppCompatActivity {
         // Get the text from the button being pressed
         String button = ((Button) v).getText().toString();
 
+        // Might change this huge if/elseif with a switch, not sure if possible
+
         // If mbtn_negate is pressed
         if (button.equals("+/-")) {
 
@@ -183,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
             result = null;
             currentNumber = "";
             storedNumber = null;
-            operation = "+";
+            operation = "";
 
             // Set the displayed number to currentNumber
             display.setText(currentNumber);
