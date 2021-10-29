@@ -12,6 +12,11 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.Objects;
 
+/**
+ * TODO
+ * Change display to string with storedNumber, operator, and currentNumber
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
