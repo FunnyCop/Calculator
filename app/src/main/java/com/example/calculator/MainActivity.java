@@ -69,11 +69,24 @@ public class MainActivity extends AppCompatActivity {
     private void setDisplay() {
 
         // If result is Infinity, display error
-        if (String.valueOf(result).equals("Infinity"))
+        if (String.valueOf(result).equals("Infinity")) {
+
             display.setText(DIVIDE_BY_ZERO_ERROR);
 
-        // If storedNumber is not null
-        else if (storedNumber != null)
+            // Set currentNumber to storedNumber
+            currentNumber = String.valueOf(storedNumber);
+
+            // Clear operation
+            operation = "";
+
+            // Clear storedNumber
+            storedNumber = null;
+
+            // Clear result
+            result = null;
+
+            // If storedNumber is not null
+        } else if (storedNumber != null)
 
             // Set the displayed number to currentNumber
             display.setText(String.format("%s %s %s", storedNumber, operation, currentNumber));
@@ -284,6 +297,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void evaluateOperation() {
 
+        logValues("BEFORE EVALUATE");
+
         final String equation = String.format("%s %s %s", storedNumber, operation, currentNumber);
         Double target;
 
@@ -317,21 +332,53 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // If result is Infinity, display error
-        if (String.valueOf(result).equals("Infinity"))
+        if (String.valueOf(result).equals("Infinity")) {
+
             display.setText(DIVIDE_BY_ZERO_ERROR);
 
-        else {
+            // Set currentNumber to storedNumber
+            currentNumber = String.valueOf(storedNumber);
+
+            // Clear operation
+            operation = "";
+
+            // Clear storedNumber
+            storedNumber = null;
+
+            // Clear result
+            result = null;
+
+        } else {
 
             // Set the displayed number to result
             display.setText(String.format("%s = %s", equation, result));
 
-            // Clear currentNumber
-            currentNumber = "";
-
             // Store result
             storedNumber = result;
 
+            // Clear currentNumber
+            currentNumber = "";
+
         }
+
+        logValues("AFTER EVALUATE");
+
+    }
+
+    /**
+     * Log dynamic values
+     * @param description Description of action
+     */
+    private void logValues(@NonNull String description) {
+
+        final String DEBUG_TAG = "DEBUG_INFO";
+
+        Log.d(DEBUG_TAG, description);
+        Log.d(DEBUG_TAG, "Current Number: " + currentNumber);
+        Log.d(DEBUG_TAG, "Stored Number: " + storedNumber);
+        Log.d(DEBUG_TAG, "Result: " + result);
+        Log.d(DEBUG_TAG, "Operation: " + operation);
+        Log.d(DEBUG_TAG, "Display: " + display.getText().toString());
 
     }
 
