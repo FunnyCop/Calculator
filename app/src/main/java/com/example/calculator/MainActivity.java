@@ -223,42 +223,27 @@ public class MainActivity extends AppCompatActivity {
      */
     private void evaluateOperation() {
 
+        Double target;
+
         // If result is null and is not equal to storedNumber
-        if (Objects.equals(result, null) || !result.equals(storedNumber)) {
+        if (Objects.equals(result, null) || !result.equals(storedNumber))
+            target = storedNumber;
+
+        else target = result;
+
+        switch(String.valueOf(operation)) {
 
             // Addition
-            if (operation.equals("+"))
-                result = storedNumber + Double.parseDouble(currentNumber);
+            case "+": result = target + Double.parseDouble(currentNumber); break;
 
             // Subtraction
-            if (operation.equals("-"))
-                result = storedNumber - Double.parseDouble(currentNumber);
+            case "-": result = target - Double.parseDouble(currentNumber); break;
 
             // Multiplication
-            if (operation.equals("*"))
-                result = storedNumber * Double.parseDouble(currentNumber);
+            case "*": result = target * Double.parseDouble(currentNumber); break;
 
             // Division
-            if (operation.equals(("/")))
-                result = storedNumber / Double.parseDouble(currentNumber);
-
-        } else {
-
-            // Addition
-            if (operation.equals("+"))
-                result = result + Double.parseDouble(currentNumber);
-
-            // Subtraction
-            if (operation.equals("-"))
-                result = result - Double.parseDouble(currentNumber);
-
-            // Multiplication
-            if (operation.equals("*"))
-                result = result * Double.parseDouble(currentNumber);
-
-            // Division
-            if (operation.equals(("/")))
-                result = result / Double.parseDouble(currentNumber);
+            case "/": result = target / Double.parseDouble(currentNumber); break;
 
         }
 
