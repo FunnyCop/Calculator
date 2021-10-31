@@ -1,5 +1,6 @@
 package com.example.calculator.layouts;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -204,6 +205,7 @@ public class Calculator {
      * Logic for the equals button
      * @param v The equals button
      */
+    @SuppressLint("SetTextI18n")
     private static void onClickEquals(View v) {
 
         if (!currentNumber.equals("") || !displaytText.equals(""))
