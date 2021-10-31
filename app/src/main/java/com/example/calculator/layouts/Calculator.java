@@ -64,6 +64,8 @@ public class Calculator {
         binding.mbtnDelete.setOnClickListener(Calculator::onClickDelete);
         binding.mbtnClear.setOnClickListener(Calculator::onClickClear);
         binding.mbtnEquals.setOnClickListener(Calculator::onClickEquals);
+        binding.mbtnStartParen.setOnClickListener(Calculator::onClickParenthesis);
+        binding.mbtnEndParen.setOnClickListener(Calculator::onClickParenthesis);
 
         final MaterialButton[] operatorButtons = new MaterialButton[] {
 
@@ -188,6 +190,12 @@ public class Calculator {
 
             updateDisplay();
 
+        } else if (!displaytText.equals("")) {
+
+            displaytText = String.format("%s %s", displaytText, ((Button) v).getText().toString());
+
+            updateDisplay();
+
         }
 
     }
@@ -198,7 +206,7 @@ public class Calculator {
      */
     private static void onClickEquals(View v) {
 
-        if (!currentNumber.equals("") && !displaytText.equals(""))
+        if (!currentNumber.equals("") || !displaytText.equals(""))
             try {
 
                 String result = String.valueOf(engine.eval(displaytText + currentNumber));
@@ -211,11 +219,41 @@ public class Calculator {
                 displaytText = "";
                 currentNumber = result;
 
+                if (result.equals("Infinity")) {
+
+                    onClickClear(v);
+
+                    display.setText("Cannot divide by zero");
+
+                }
+
             } catch (ScriptException e) {
 
                 Log.wtf("onClickEquals", e);
 
             }
+
+    }
+
+    /**
+     * Logic for the parenthesis buttons
+     * @param v The parenthesis button
+     */
+    private static void onClickParenthesis(View v) {
+
+        String button = ((Button) v).getText().toString();
+
+        if (currentNumber.equals(""))
+            displaytText = String.format("%s %s", displaytText, "(");
+
+        else {
+
+            displaytText = String.format("%s %s %s", displaytText, currentNumber, button);
+            currentNumber = "";
+
+        }
+
+        updateDisplay();
 
     }
 

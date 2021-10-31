@@ -204,33 +204,55 @@
     <!--  Point  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_point"
-        style="@style/mbtn.bottom.margin"
+        style="@style/mbtn.margin"
         android:text="."
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mbtn_delete"
         app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_start_paren"
         tools:ignore="HardcodedText" />
 
     <!--  Backspace  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_delete"
-        style="@style/mbtn.bottom.margin"
+        style="@style/mbtn.margin"
         android:text="delete"
         app:layout_constraintStart_toEndOf="@id/mbtn_point"
         app:layout_constraintEnd_toStartOf="@id/mbtn_clear"
         app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_start_paren"
         tools:ignore="HardcodedText" />
 
     <!--  Clear  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_clear"
-        style="@style/mbtn.bottom"
+        style="@style/mbtn"
         android:text="clear"
         app:layout_constraintStart_toEndOf="@id/mbtn_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mbtn_zero"
+        app:layout_constraintBottom_toTopOf="@id/mbtn_start_paren"
+        tools:ignore="HardcodedText" />
+
+    <!--  Start Parenthesis  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_start_paren"
+        style="@style/mbtn.bottom.margin"
+        android:text="("
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_end_paren"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_point"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!--  End Parenthesis  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_end_paren"
+        style="@style/mbtn.bottom"
+        android:text=")"
+        app:layout_constraintStart_toEndOf="@id/mbtn_start_paren"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_point"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
 
