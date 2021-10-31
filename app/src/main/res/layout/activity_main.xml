@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
+    android:background="@color/old_lavender"
     android:padding="16dp"
     tools:context=".MainActivity">
 
@@ -15,12 +15,15 @@
         android:layout_height="0dp"
         android:padding="12dp"
         android:gravity="center"
-        android:background="@color/white"
+        android:background="@color/languid_lavender"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mbtn_one"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1" />
+        app:layout_constraintVertical_weight="1"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
     <!--  One  -->
     <com.google.android.material.button.MaterialButton

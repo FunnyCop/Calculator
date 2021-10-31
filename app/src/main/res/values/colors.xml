@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="cerise">#FFDA4167</color>
+    <color name="mardi_gras">#FFBC30EA</color>
+    <color name="languid_lavender">#FFD1CCDC</color>
+    <color name="old_lavender">#FF6A687A</color>
+    <color name="dim_gray">#FF6B6D76</color>
+    <color name="sonic_silver">#FF707078</color>
 </resources>
