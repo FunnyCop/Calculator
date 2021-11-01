@@ -237,7 +237,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_clear"
         style="@style/mbtn"
-        android:text="clear"
+        android:text="clr"
         app:layout_constraintStart_toEndOf="@id/mbtn_delete"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mbtn_divide"
@@ -258,11 +258,33 @@
     <!--  End Parenthesis  -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbtn_end_paren"
-        style="@style/mbtn.bottom"
+        style="@style/mbtn.bottom.margin"
         android:text=")"
         app:layout_constraintStart_toEndOf="@id/mbtn_start_paren"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_square_root"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_point"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!--  Square Root  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_square_root"
+        style="@style/mbtn.bottom.margin"
+        android:text="√"
+        app:layout_constraintStart_toEndOf="@id/mbtn_end_paren"
+        app:layout_constraintEnd_toStartOf="@id/mbtn_modulus"
         app:layout_constraintTop_toBottomOf="@id/mbtn_delete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <!--  Modulus  -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbtn_modulus"
+        style="@style/mbtn.bottom"
+        android:text="%"
+        app:layout_constraintStart_toEndOf="@id/mbtn_square_root"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mbtn_clear"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="HardcodedText" />
 

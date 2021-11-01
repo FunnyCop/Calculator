@@ -15,13 +15,22 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
+/**
+ * TODO
+ * Create exponent
+ * Comment more
+ * Test Parenthesis
+ * Fix equals onClick
+ */
+
 public class Calculator {
 
     private static MaterialTextView display;
     private static ScriptEngine engine;
 
     private static String currentNumber = "";
-    private static String displaytText = "";
+    private static String displayText = "";
+    private static String equation = "";
 
     /**
      * Initialize the Calculator
@@ -29,9 +38,13 @@ public class Calculator {
      */
     public static void init(@NonNull ActivityMainBinding binding) {
 
+        // Store binding from activity
         display = binding.tvMain;
+
+        // Get rhino JavaScript engine
         engine = new ScriptEngineManager().getEngineByName("rhino");
 
+        // Initialize on click listeners for buttons
         initButtons(binding);
 
     }
@@ -42,6 +55,7 @@ public class Calculator {
      */
     private static void initButtons(@NonNull ActivityMainBinding binding) {
 
+        // Array of number buttons
         final MaterialButton[] numberButtons = new MaterialButton[] {
 
                 binding.mbtnZero,
@@ -57,17 +71,11 @@ public class Calculator {
 
         };
 
+        // For each number button, set on click listener
         for (MaterialButton button : numberButtons)
             button.setOnClickListener(Calculator::onClickNumber);
 
-        binding.mbtnNegate.setOnClickListener(Calculator::onClickNegate);
-        binding.mbtnPoint.setOnClickListener(Calculator::onClickPoint);
-        binding.mbtnDelete.setOnClickListener(Calculator::onClickDelete);
-        binding.mbtnClear.setOnClickListener(Calculator::onClickClear);
-        binding.mbtnEquals.setOnClickListener(Calculator::onClickEquals);
-        binding.mbtnStartParen.setOnClickListener(Calculator::onClickParenthesis);
-        binding.mbtnEndParen.setOnClickListener(Calculator::onClickParenthesis);
-
+        // Array of mathematical operators (basic)
         final MaterialButton[] operatorButtons = new MaterialButton[] {
 
                 binding.mbtnPlus,
@@ -77,10 +85,33 @@ public class Calculator {
 
         };
 
+        // For each mathematical operator, set on click listener
         for (MaterialButton button : operatorButtons)
             button.setOnClickListener(Calculator::onClickOperator);
 
-        display.setText(displaytText);
+        // Negate
+        binding.mbtnNegate.setOnClickListener(Calculator::onClickNegate);
+
+        // Decimal Point
+        binding.mbtnPoint.setOnClickListener(Calculator::onClickPoint);
+
+        // Delete
+        binding.mbtnDelete.setOnClickListener(Calculator::onClickDelete);
+
+        // Clear
+        binding.mbtnClear.setOnClickListener(Calculator::onClickClear);
+
+        // Equals
+        binding.mbtnEquals.setOnClickListener(Calculator::onClickEquals);
+
+        // Start Parenthesis
+        binding.mbtnStartParen.setOnClickListener(Calculator::onClickParenthesis);
+
+        // End Parenthesis
+        binding.mbtnEndParen.setOnClickListener(Calculator::onClickParenthesis);
+
+        // Exponent
+        binding.mbtnExponent.setOnClickListener(Calculator::onClickExponent);
 
     }
 
@@ -89,7 +120,7 @@ public class Calculator {
      */
     private static void updateDisplay() {
 
-        display.setText(String.format("%s %s", displaytText, currentNumber));
+        display.setText(String.format("%s %s", displayText, currentNumber));
 
     }
 
@@ -167,7 +198,8 @@ public class Calculator {
     private static void onClickClear(View v) {
 
         currentNumber = "";
-        displaytText = "";
+        displayText = "";
+        equation = "";
 
         updateDisplay();
 
@@ -181,19 +213,26 @@ public class Calculator {
 
         if (!currentNumber.equals("")) {
 
-            if (displaytText.equals(""))
-                displaytText = String.format("%s %s", currentNumber, ((Button) v).getText().toString());
+            if (displayText.equals(""))
+                displayText = String.format("%s %s", currentNumber, ((Button) v).getText().toString());
 
-            else
-                displaytText = String.format("%s %s %s", displaytText, currentNumber, ((Button) v).getText().toString());
+            else if (equation.equals(""))
+                displayText = String.format("%s %s %s", displayText, currentNumber, ((Button) v).getText().toString());
+
+            else {
+
+                displayText = String.format("%s %s %s", displayText, currentNumber, ((Button) v).getText().toString());
+                equation = String.format("%s %s %s", equation, currentNumber, ((Button) v).getText().toString());
+
+            }
 
             currentNumber = "";
 
             updateDisplay();
 
-        } else if (!displaytText.equals("")) {
+        } else if (!displayText.equals("")) {
 
-            displaytText = String.format("%s %s", displaytText, ((Button) v).getText().toString());
+            displayText = String.format("%s %s", displayText, ((Button) v).getText().toString());
 
             updateDisplay();
 
@@ -208,17 +247,26 @@ public class Calculator {
     @SuppressLint("SetTextI18n")
     private static void onClickEquals(View v) {
 
-        if (!currentNumber.equals("") || !displaytText.equals(""))
+        Log.d("DEBUG_INFO", "Current Number: " + currentNumber);
+        Log.d("DEBUG_INFO", "Display Text: " + displayText);
+        Log.d("DEBUG_INFO", "Equation: " + equation);
+
+        if (!currentNumber.equals("") || !displayText.equals(""))
             try {
 
-                String result = String.valueOf(engine.eval(displaytText + currentNumber));
+                String result;
+
+                if (equation.equals(""))
+                    result = String.valueOf(engine.eval(displayText + currentNumber));
+
+                else result = String.valueOf(engine.eval(equation + currentNumber));
 
                 if ((Double.parseDouble(result) % 1 == 0))
                     result = String.valueOf(((Double) Double.parseDouble(result)).intValue());
 
-                display.setText(String.format("%s %s = %s", displaytText, currentNumber, result));
+                display.setText(String.format("%s %s = %s", displayText, currentNumber, result));
 
-                displaytText = "";
+                displayText = "";
                 currentNumber = result;
 
                 if (result.equals("Infinity")) {
@@ -229,9 +277,15 @@ public class Calculator {
 
                 }
 
+                Log.d("DEBUG_INFO", result);
+
             } catch (ScriptException e) {
 
                 Log.wtf("onClickEquals", e);
+
+                onClickClear(v);
+
+                display.setText("Error");
 
             }
 
@@ -245,17 +299,48 @@ public class Calculator {
 
         String button = ((Button) v).getText().toString();
 
-        if (currentNumber.equals(""))
-            displaytText = String.format("%s %s", displaytText, "(");
+        if (currentNumber.equals("")) {
 
-        else {
+            displayText = String.format("%s %s", displayText, button);
 
-            displaytText = String.format("%s %s %s", displaytText, currentNumber, button);
+            if (!equation.equals(""))
+                equation = String.format("%s %s", equation, button);
+
+        } else {
+
+            displayText = String.format("%s %s %s", displayText, currentNumber, button);
+
+            if (!equation.equals(""))
+                equation = String.format("%s %s %s", equation, currentNumber, button);
+
             currentNumber = "";
 
         }
 
         updateDisplay();
+
+    }
+
+    /**
+     * Logic for the exponent button
+     * @param v The exponent button
+     */
+    private static void onClickExponent(View v) {
+
+        if (!currentNumber.equals("")) {
+
+            if (equation.equals(""))
+                equation = String.format("%s %s", displayText, String.format("Math.pow(%s,", currentNumber));
+
+            else
+                equation = String.format("%s %s", equation, String.format("Math.pow(%s,", currentNumber));
+
+            displayText = String.format("%s %s", displayText, String.format("%s^(", currentNumber));
+            currentNumber = "";
+
+            updateDisplay();
+
+        }
 
     }
 

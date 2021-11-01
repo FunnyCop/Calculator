@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="mbtn">
+
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="layout_constraintHorizontal_chainStyle">spread</item>
+        <item name="layout_constraintVertical_chainStyle">spread</item>
+        <item name="layout_constraintVertical_weight">1</item>
+        <item name="backgroundTint">@color/mardi_gras</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="mbtn.margin">
+
+        <item name="android:layout_marginEnd">12dp</item>
+
+    </style>
+
+    <style name="mbtn.margin.num">
+
+        <item name="backgroundTint">@color/cerise</item>
+
+    </style>
+
+    <style name="mbtn.bottom">
+
+        <item name="layout_constraintHorizontal_weight">1</item>
+
+    </style>
+
+    <style name="mbtn.bottom.margin">
+
+        <item name="android:layout_marginEnd">12dp</item>
+
+    </style>
+
+    <style name="toprow" parent="mbtn">
+
+        <item name="android:layout_marginTop">8dp</item>
+
+    </style>
+
+    <style name="toprownum" parent="mbtn.margin.num">
+
+        <item name="android:layout_marginTop">8dp</item>
+
+    </style>
+
+</resources>
